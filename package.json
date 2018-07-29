@@ -1,0 +1,39 @@
+{
+  "name": "prettier-plugin-gml",
+  "version": "0.0.1",
+  "description": "Prettier GML Plugin",
+  "license": "MIT",
+  "main": "src",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "gml-pegjs": "^0.1.2"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "jest": "22.4.3",
+    "jest-runner-eslint": "0.4.0",
+    "prettier": "1.13.7",
+    "prettier-from-github": "prettier/prettier#4c464133ac37a966c792cacc660853d74c776841"
+  },
+  "peerDependencies": {
+    "prettier": ">=1.0.0"
+  },
+  "scripts": {
+    "test": "cross-env AST_COMPARE=1 jest",
+    "test:watch": "cross-env AST_COMPARE=1 jest --watchAll --updateSnapshot",
+    "prettier": "prettier --plugin=. --parser=gml"
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/jest.*.config.js"
+    ],
+    "verbose": true
+  }
+}
