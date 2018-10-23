@@ -1,0 +1,24 @@
+{
+  "name": "prettier-plugin-gml",
+  "version": "0.0.1",
+  "description": "Prettier GML Plugin",
+  "author": "Jason Di Benedetto <jason.dibenedetto6@gmail.com>",
+  "license": "MIT",
+  "main": "src",
+  "dependencies": {
+    "gml-pegjs": "^0.1.2",
+    "prettier": "^1.13.6"
+  },
+  "scripts": {
+    "format": "prettier --write **/*.js",
+    "lint": "eslint **/*.js",
+    "test": "node test"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}
