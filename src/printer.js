@@ -1,9 +1,10 @@
 function genericPrint(path) {
   const node = path.getValue();
 
+  console.log(node);
+
   switch (node.ast_type) {
     case 'gml-pegjs': {
-      console.log(node);
       return node.body;
     }
 

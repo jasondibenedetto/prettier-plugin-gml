@@ -19,8 +19,7 @@
     "eslint-plugin-react": "^7.9.1",
     "jest": "22.4.3",
     "jest-runner-eslint": "0.4.0",
-    "prettier": "1.13.7",
-    "prettier-from-github": "prettier/prettier#4c464133ac37a966c792cacc660853d74c776841"
+    "prettier": "prettier/prettier#d05a29da05b2084790491eaef85917ce584e4fbd"
   },
   "peerDependencies": {
     "prettier": ">=1.0.0"

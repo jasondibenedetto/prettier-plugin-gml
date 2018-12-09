@@ -9,15 +9,30 @@ const languages = [
   },
 ];
 
+function locStart(/* node */) {
+  return -1;
+}
+
+function locEnd(/* node */) {
+  return -1;
+}
+
+function hasPragma(/* text */) {
+  return false;
+}
+
 const parsers = {
   gml: {
     parse,
-    astFormat: 'gml-pegjs',
+    astFormat: 'gml',
+    locStart,
+    locEnd,
+    hasPragma,
   },
 };
 
 const printers = {
-  'gml-pegjs': {
+  gml: {
     print,
   },
 };

@@ -1,21 +1,21 @@
 const fs = require('fs');
-const { extname } = require('path');
+const extname = require('path').extname;
 const prettier = require('prettier');
-const { massageAST } = require('prettier-from-github/src/common/clean-ast');
-const { normalize } = require('prettier-from-github/src/main/options');
-const plugin = require('../src');
+const massageAST = require('prettier/src/common/clean-ast').massageAST;
+const normalizeOptions = require('prettier/src/main/options').normalize;
 
-const { AST_COMPARE } = process.env;
+const AST_COMPARE = process.env.AST_COMPARE;
 
 function run_spec(dirname, parsers, options) {
   options = Object.assign(
     {
       plugins: ['.'],
+      tabWidth: 4,
     },
     options,
   );
 
-  /* istanbul ignore if */
+  /* instabul ignore if */
   if (!parsers || !parsers.length) {
     throw new Error(`No parsers were specified for ${dirname}`);
   }
@@ -33,7 +33,6 @@ function run_spec(dirname, parsers, options) {
       const mergedOptions = Object.assign({}, options, {
         parser: parsers[0],
       });
-
       const output = prettyprint(source, path, mergedOptions);
       test(`${filename} - ${mergedOptions.parser}-verify`, () => {
         expect(raw(`${source + '~'.repeat(80)}\n${output}`)).toMatchSnapshot(
@@ -52,8 +51,8 @@ function run_spec(dirname, parsers, options) {
       });
 
       if (AST_COMPARE) {
-        const normalizedOptions = normalize(mergedOptions);
         const ast = parse(source, mergedOptions);
+        const normalizedOptions = normalizeOptions(mergedOptions);
         const astMassaged = massageAST(ast, normalizedOptions);
         let ppastMassaged;
         let pperr = null;
@@ -105,7 +104,7 @@ function stripLocation(ast) {
 }
 
 function parse(string, opts) {
-  return stripLocation(plugin.parsers.gml.parse(string, {}, opts));
+  return stripLocation(prettier.__debug.parse(string, opts));
 }
 
 function prettyprint(src, filename, options) {
@@ -121,7 +120,7 @@ function prettyprint(src, filename, options) {
 }
 
 function read(filename) {
-  return fs.readFileSync(filename, 'utf-8');
+  return fs.readFileSync(filename, 'utf8');
 }
 
 /**
